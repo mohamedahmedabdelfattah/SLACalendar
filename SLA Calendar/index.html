@@ -1,0 +1,255 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Mohamed Ahmed Abdel Fattah">
+    <link rel="icon" href="Theme/favicon.ico" />
+    <title>SLA Calendar by MAFattah</title>
+    <script src="Scripts/jquery-2.1.4.min.js"></script>
+    <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="Theme/jquery-ui.min.js"></script>
+    <link href="Theme/jquery-ui.min.css" rel="stylesheet" />
+    <style>
+        body {
+            /*background-color:#444545;*/
+            /*background: url('../img/darkdenim3.png') repeat 0 0 #555;*/
+        }
+
+        .textcolor .spinner{
+            color:black !important;
+        }
+
+         /*JQuery UI datepicker select theme color fix*/
+        select {
+            color:black !important;
+        }
+
+        /*.ui-datepicker {
+            width:100% !important;
+        }*/
+
+        /*datepicker relative control styling*/
+        #txtdatepicker {
+            border: 1px solid #555;
+            border-bottom-right-radius: 6px;
+            border-bottom-left-radius: 6px;
+            border-top-right-radius: 6px;
+            border-top-left-radius: 6px;
+            background-image: url('Theme/images/ui-bg_loop_25_000000_21x21.png');
+            color: white;
+        }
+
+        /*Custom class to color specific dates*/
+        .egweekends a {
+            color: yellow !important;
+        }
+
+        .ui-datepicker td {
+            border: medium none;
+            padding: 0px;
+        }
+
+            .ui-datepicker td a {
+                text-align: center;
+            }
+
+        .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
+            color: black;
+        }
+    </style>
+    <script>
+        $(function () {
+
+            // Controls Initialization
+            $('#date1').datepicker();
+            $('#date2').datepicker();
+            $('#txtSLA').spinner();
+            $('#datepicker').datepicker({
+                //firstDay: 0,
+                inline: true,
+                numberOfMonths: 3,
+                numberOfMonths: [3,4],
+                altField: "#txtdatepicker",
+                dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                defaultDate: 0,
+                //showButtonPanel: true,
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(2010, 1 - 1, 1),
+                maxDate: '+5Y',
+                dateFormat: 'dd-mm-yy',
+                beforeShowDay: weekends,
+                onSelect: autoCalc                
+            });
+
+            // Add a custom class to specific dates to color theme using CSS
+            function weekends(date) {
+                return [true, date.getDay() == 5 || date.getDay() == 6  ? 'egweekends' : ''];
+            }
+
+            // Today button functionality
+            $.datepicker._gotoToday = function (id) {
+                $(id).datepicker('setDate', new Date()).datepicker('hide').blur();
+            };
+
+            $('#btnCalc').click(function () {
+
+                var today = $('#datepicker').datepicker("getDate");  // global variables
+                var holidays = [
+                    ////////////////////////////////////////////////////////////////
+                    //                                                            //
+                    // Add Custom Holidays like below to disable them from the    //
+                    // working days count like 7 Jan                              //
+                    //                                                            //
+                    // [YEAR,MONTH,DAY]                               // SAME FORMAT
+                    [2010, 1, 7],                                     // Jan 7, 2010
+                    [2011, 1, 7],                                     // Jan 7, 2011
+                    [2012, 1, 7],                                     // Jan 7, 2012
+                    [2013, 1, 7],                                     // Jan 7, 2013
+                    [2014, 1, 7],                                     // Jan 7, 2014
+					[2015, 1, 7],                                     // Jan 7, 2015
+                    [2015, 12, 23],                                   // Dec 7, 2015
+                    [2016, 1, 7],                                     // Jan 7, 2016
+                    [2017, 1, 7],                                     // Jan 7, 2017
+                    [2018, 1, 7],                                     // Jan 7, 2018
+                    [2019, 1, 7],                                     // Jan 7, 2019
+                    [2020, 1, 7]                                      // Jan 7, 2020
+                    //                                                            //
+                    //                // No comma with last entry                 //
+                    //                                                            //
+                    //                                                            //
+                    //                                                            //
+                    ////////////////////////////////////////////////////////////////
+                ];
+
+                Date.prototype.addDays = function (days) { return new Date(this.getTime() + days * 24 * 60 * 60 * 1000); }
+
+                Date.prototype.addBusAndHoliDays = function (days) {
+                    var cDate = this;
+                    var holiday = new Date();
+                    var c = '', h = '';
+                    for (var i = 1; i <= days ; i++) {
+                        cDate.setDate(cDate.getDate() + 1);
+                        if (cDate.getDay() == 5 || cDate.getDay() == 6) { days++; }
+                        else {
+                            for (j = 0; j < holidays.length; j++) {
+                                holiday = new Date(holidays[j][0], (holidays[j][1] - 1), holidays[j][2]);
+                                c = cDate.toDateString(); h = holiday.toDateString();
+                                if (c == h) { days++; }
+                            }
+                        }
+                    } return cDate;
+                }
+
+                var bizd = today.addBusAndHoliDays($('#txtSLA').val());
+
+                var dd = bizd.getDate();
+                var mm = bizd.getMonth() + 1; //January is 0!
+
+                var yyyy = bizd.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd
+                }
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
+
+                bizd = dd + '-' + mm + '-' + yyyy;
+
+                $('#txtSLAEnd').text("End Date: " + bizd);
+
+                if ($('#MarkResultinCal').prop('checked'))
+                    $('#datepicker').datepicker("setDate", bizd);
+            });
+
+            //Automatically Calculate on datepicker date selection cahnge instead of clicking Calc button each time
+            function autoCalc() {
+                if ($('#btnAutoCalc').prop('checked'))
+                    $('#btnCalc').trigger('click');
+            };
+
+            $('#btnToday').click(function () {
+                $('#datepicker').datepicker("setDate", new Date());
+            });
+
+            /// <summary>Blinking</summary>
+            //$('#txtSLAEnd').each(function () {
+            //    if ($('#txtSLAEnd').val() !== "Select SLA start date and duration") {
+            //        var elem = $(this);
+            //        setInterval(function () {
+            //            if (elem.css('visibility') == 'hidden') {
+            //                elem.css('visibility', 'visible');
+            //            } else {
+            //                elem.css('visibility', 'hidden');
+            //            }
+            //        }, 500);
+            //    }
+            //});
+
+
+
+        });
+    </script>
+</head>
+<body>
+    <div class="container" style="margin-bottom:50px;">
+
+        <div class="row col-lg-12">
+
+            <div class="text-center">
+                <br />
+
+                <label class="textcolor">Date </label>
+
+                <input id="txtdatepicker" required="required" type="text" style="height:30px;width:130px;">
+
+                <label class="textcolor" >SLA </label></>
+
+                <input id="txtSLA" class="textcolor" style="width:100px;" type="text" value="1" min="1" max="365" required="required" />
+
+                <label class="textcolor" >WDS</label>
+
+                <input class="ui-button" id="btnCalc" type="button" value="Calc" /></>
+
+            </div>
+
+            <div id="datepicker" >
+
+                <input class="ui-button text-left" id="btnToday" type="button" value="Today" /></>
+                
+                <label>
+                    <input class="textcolor text-left" id="MarkResultinCal" type="checkbox" /> Mark SLA End in the calendar
+                </label>
+                
+                <label>
+                    <input class="textcolor text-left" id="btnAutoCalc" type="checkbox" /> Auto Calculate when choosing the date
+                </label>
+
+                <label class="text-right label" id="txtSLAEnd" style="color:blue;font-size:20px;">Select SLA start date and duration</label> </>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="textcolor" style="bottom:0;width:100%;position:fixed;background-color:#233140;text-align:center;font-size:15px;">
+        <p style="margin:0px;color:white;">Last update: v1.29.12.15 - SLA Calendar by 
+            <a style="color:cyan;" href="https://about.me/m7md.3.fta7" target="_blank">Mohamed Ahmed Abdel Fattah</a>
+            <a style="color:yellow" href="https://goo.gl/PfBTs2" target="_blank" >Contact Me</a>
+        </p>
+	</div>
+	
+</body>
+</html>
