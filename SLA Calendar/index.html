@@ -46,11 +46,6 @@
             color: white;
         }
 
-        /*Custom class to color specific dates*/
-        .egweekends a {
-            color: yellow !important;
-        }
-
         .ui-datepicker td {
             border: medium none;
             padding: 0px;
@@ -62,7 +57,18 @@
 
         .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
             color: black;
+        } 
+        
+        /*Custom class to color specific dates*/
+        .egweekends a {
+            color: yellow !important;
         }
+
+        .ui-datepicker {
+            width: 100%;
+            margin: 0 auto;
+        }
+
     </style>
     <script>
         $(function () {
@@ -217,35 +223,33 @@
                 <label class="textcolor" >WDS</label>
 
                 <input class="ui-button" id="btnCalc" type="button" value="Calc" /></>
-
+            
             </div>
 
-            <div id="datepicker" >
+            <div id="datepicker" class="text-center" >
 
-                <input class="ui-button text-left" id="btnToday" type="button" value="Today" /></>
+                <input class="ui-button" id="btnToday" type="button" value="Today" /></>
                 
                 <label>
-                    <input class="textcolor text-left" id="MarkResultinCal" type="checkbox" /> Mark SLA End in the calendar
+                    <input class="textcolor" id="MarkResultinCal" type="checkbox" /> Mark SLA End in the calendar
                 </label>
                 
                 <label>
-                    <input class="textcolor text-left" id="btnAutoCalc" type="checkbox" /> Auto Calculate when choosing the date
+                    <input class="textcolor" id="btnAutoCalc" type="checkbox" /> Auto Calculate when choosing the date
                 </label>
 
-                <label class="text-right label" id="txtSLAEnd" style="color:blue;font-size:20px;">Select SLA start date and duration</label> </>
-
+                <label class="label" id="txtSLAEnd" style="color:blue;font-size:20px;">Select SLA start date and duration</label> </>
+            
             </div>
-
         </div>
-
     </div>
 
     <div class="textcolor" style="bottom:0;width:100%;position:fixed;background-color:#233140;text-align:center;font-size:15px;">
-        <p style="margin:0px;color:white;">Last update: v1.29.12.15 - SLA Calendar by 
+        <p style="margin:0px;color:white;">Last update: v1.30.12.15 - SLA Calendar by 
             <a style="color:cyan;" href="https://about.me/m7md.3.fta7" target="_blank">Mohamed Ahmed Abdel Fattah</a>
             <a style="color:yellow" href="https://goo.gl/PfBTs2" target="_blank" >Contact Me</a>
         </p>
 	</div>
-	
+
 </body>
 </html>
