@@ -46,6 +46,12 @@
             color: white;
         }
 
+        .ui-datepicker {
+            width: 100%;
+            margin: 0 auto;
+            font-size: 13px !important;
+        }
+
         .ui-datepicker td {
             border: medium none;
             padding: 0px;
@@ -54,24 +60,22 @@
             .ui-datepicker td a {
                 text-align: center;
             }
-
-        .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-            color: black;
-        } 
         
         /*Custom class to color specific dates*/
         .egweekends a {
             color: yellow !important;
         }
 
-        .ui-datepicker {
-            width: 100%;
-            margin: 0 auto;
-        }
-
     </style>
+
     <script>
         $(function () {
+
+            $(window).resize(function () {
+                $('#datepicker').datepicker({
+                    numberOfMonths: [12,1],
+                });
+            });
 
             // Controls Initialization
             $('#date1').datepicker();
@@ -79,17 +83,16 @@
             $('#txtSLA').spinner();
             $('#datepicker').datepicker({
                 //firstDay: 0,
+                defaultDate: 0,
                 inline: true,
-                numberOfMonths: 3,
                 numberOfMonths: [3,4],
                 altField: "#txtdatepicker",
                 dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-                defaultDate: 0,
                 //showButtonPanel: true,
                 changeMonth: true,
                 changeYear: true,
                 minDate: new Date(2010, 1 - 1, 1),
-                maxDate: '+5Y',
+                maxDate: new Date(2020, 12 - 1,31),
                 dateFormat: 'dd-mm-yy',
                 beforeShowDay: weekends,
                 onSelect: autoCalc                
