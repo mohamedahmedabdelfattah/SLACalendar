@@ -66,39 +66,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Contentx\themes\base\accordion.css" />
-    <Content Include="Contentx\themes\base\all.css" />
-    <Content Include="Contentx\themes\base\autocomplete.css" />
-    <Content Include="Contentx\themes\base\base.css" />
-    <Content Include="Contentx\themes\base\button.css" />
-    <Content Include="Contentx\themes\base\core.css" />
-    <Content Include="Contentx\themes\base\datepicker.css" />
-    <Content Include="Contentx\themes\base\dialog.css" />
-    <Content Include="Contentx\themes\base\draggable.css" />
-    <Content Include="Contentx\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
-    <Content Include="Contentx\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
-    <Content Include="Contentx\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
-    <Content Include="Contentx\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
-    <Content Include="Contentx\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
-    <Content Include="Contentx\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
-    <Content Include="Contentx\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
-    <Content Include="Contentx\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
-    <Content Include="Contentx\themes\base\images\ui-icons_222222_256x240.png" />
-    <Content Include="Contentx\themes\base\images\ui-icons_2e83ff_256x240.png" />
-    <Content Include="Contentx\themes\base\images\ui-icons_454545_256x240.png" />
-    <Content Include="Contentx\themes\base\images\ui-icons_888888_256x240.png" />
-    <Content Include="Contentx\themes\base\images\ui-icons_cd0a0a_256x240.png" />
-    <Content Include="Contentx\themes\base\menu.css" />
-    <Content Include="Contentx\themes\base\progressbar.css" />
-    <Content Include="Contentx\themes\base\resizable.css" />
-    <Content Include="Contentx\themes\base\selectable.css" />
-    <Content Include="Contentx\themes\base\selectmenu.css" />
-    <Content Include="Contentx\themes\base\slider.css" />
-    <Content Include="Contentx\themes\base\sortable.css" />
-    <Content Include="Contentx\themes\base\spinner.css" />
-    <Content Include="Contentx\themes\base\tabs.css" />
-    <Content Include="Contentx\themes\base\theme.css" />
-    <Content Include="Contentx\themes\base\tooltip.css" />
     <Content Include="Sources\favicon.ico" />
     <Content Include="Sources\images\animated-overlay.gif" />
     <Content Include="Sources\images\cal_logo.png" />
@@ -129,7 +96,6 @@
     <Content Include="Sources\jquery-ui.min.css" />
     <Content Include="Sources\jquery-ui.min.js" />
     <Content Include="packages.config" />
-    <Content Include="Scriptsx\jquery-2.1.4.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -138,23 +104,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Contentx\bootstrap-theme.css" />
-    <Content Include="Contentx\bootstrap-theme.min.css" />
-    <Content Include="Contentx\bootstrap.css" />
     <Content Include="Sources\bootstrap.min.css" />
-    <Content Include="fontsx\glyphicons-halflings-regular.svg" />
-    <Content Include="fontsx\glyphicons-halflings-regular.woff2" />
-    <Content Include="fontsx\glyphicons-halflings-regular.woff" />
-    <Content Include="fontsx\glyphicons-halflings-regular.ttf" />
-    <Content Include="fontsx\glyphicons-halflings-regular.eot" />
-    <Content Include="Contentx\bootstrap.min.css.map" />
-    <Content Include="Contentx\bootstrap.css.map" />
-    <Content Include="Contentx\bootstrap-theme.min.css.map" />
-    <Content Include="Contentx\bootstrap-theme.css.map" />
-    <None Include="Scriptsx\jquery-2.1.4.intellisense.js" />
-    <Content Include="Scriptsx\bootstrap.js" />
     <Content Include="Sources\bootstrap.min.js" />
-    <Content Include="Scriptsx\jquery-2.1.4.js" />
     <Content Include="Sources\jquery-2.1.4.min.js" />
     <Content Include="index.html" />
     <Content Include="Web.config" />
