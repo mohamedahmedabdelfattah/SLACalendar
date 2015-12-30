@@ -96,18 +96,12 @@
                     [2019, 1, 7],                                     // Jan 7, 2019
                     [2020, 1, 7]                                      // Jan 7, 2020
                     //                                                            //
-                    //                // No comma with last entry                 //
+                    //                                                            //
                     //                                                            //
                     //                                                            //
                     //                                                            //
                     ////////////////////////////////////////////////////////////////
             ];
-
-            $(window).resize(function () {
-                $('#datepicker').datepicker({
-                    numberOfMonths: [12,1],
-                });
-            });
 
             // Controls Initialization
             $('#date1').datepicker();
@@ -132,7 +126,6 @@
 
             // Add a custom class to specific dates to color theme using CSS
             function weekends(date) {
-
                 var dayoff = date.getFullYear() + ',' + (date.getMonth() + 1) + ',' + date.getDate();
 
                 for (i = 0; i < holidays.length; i++) {
@@ -140,12 +133,7 @@
                         return [true,'dayoff'];
                 }
 
-                return [true, date.getDay() == 5 || date.getDay() == 6 ? 'egweekends' : ''];
-            };
-
-            // Today button functionality
-            $.datepicker._gotoToday = function (id) {
-                $(id).datepicker('setDate', new Date()).datepicker('hide').blur();
+                return [true, date.getDay() == 5 || date.getDay() == 6 ? 'egweekends': ''];
             };
 
             $('#btnCalc').click(function () {
@@ -198,8 +186,9 @@
                     $('#btnCalc').trigger('click');
             };
 
+            // Today button functionality
             $('#btnToday').click(function () {
-                $('#datepicker').datepicker("setDate", new Date());
+                $('#datepicker').datepicker("setDate", new Date()).datepicker('hide').blur();
             });
 
             /// <summary>Blinking</summary>
@@ -215,7 +204,6 @@
             //        }, 500);
             //    }
             //});
-
 
 
         });
