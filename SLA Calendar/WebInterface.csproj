@@ -96,6 +96,7 @@
     <Content Include="Sources\jquery-ui.min.css" />
     <Content Include="Sources\jquery-ui.min.js" />
     <Content Include="packages.config" />
+    <Content Include="Sources\Holidays.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

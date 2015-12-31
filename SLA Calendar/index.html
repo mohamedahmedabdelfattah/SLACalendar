@@ -191,6 +191,10 @@
                 $('#datepicker').datepicker("setDate", new Date()).datepicker('hide').blur();
             });
 
+
+            //Reads the Holidays data from the Json file
+
+
             /// <summary>Blinking</summary>
             //$('#txtSLAEnd').each(function () {
             //    if ($('#txtSLAEnd').val() !== "Select SLA start date and duration") {
@@ -215,7 +219,7 @@
         <div class="row col-lg-12">
 
             <div class="text-center">
-                <label> White Background for Today - the other White is normal WDS - Yellow is Official Holidays - Red is Weekends </label>
+                <label class="textcolor" > White Background for Today - the other White is normal WDS - Yellow is Official Holidays - Red is Weekends </label>
             </div>
 
             <div class="text-center">
@@ -229,30 +233,31 @@
 
                 <label class="textcolor" >WDS</label>
 
-                <input class="ui-button" id="btnCalc" type="button" value="Calc" /></>
+                <input class="btn btn-success" id="btnCalc" type="submit" value="Calc" /></>
             
             </div>
 
-            <div id="datepicker" class="text-center" >
+            <div class="text-center">
 
-                <input class="ui-button" id="btnToday" type="button" value="Today" /></>
-                
-                <label>
-                    <input class="textcolor" id="MarkResultinCal" type="checkbox" /> Mark SLA End in the calendar
+                <input class="btn btn-info btn-xs" id="btnToday" type="button" value="Today" /></>
+
+                <label class="textcolor checkbox-inline">
+                    <input id="MarkResultinCal" type="checkbox" /> Mark SLA End in the calendar
                 </label>
-                
-                <label>
-                    <input class="textcolor" id="btnAutoCalc" type="checkbox" /> Auto Calculate when choosing the date
+
+                <label class="textcolor checkbox-inline">
+                    <input id="btnAutoCalc" type="checkbox" /> Auto Calculate when choosing the date
                 </label>
 
                 <label class="label" id="txtSLAEnd" style="color:blue;font-size:20px;">Select SLA start date and duration</label> </>
-            
             </div>
+
+            <div id="datepicker"> </div>
         </div>
     </div>
 
     <div class="textcolor" style="bottom:0;width:100%;position:fixed;background-color:#233140;text-align:center;font-size:15px;">
-        <p style="margin:0px;color:white;">Last update: v1.30.12.15 - SLA Calendar by 
+        <p style="margin:0px;color:white;">Last update: v1.31.12.15 - SLA Calendar by 
             <a style="color:cyan;" href="https://about.me/m7md.3.fta7" target="_blank">Mohamed Ahmed Abdel Fattah</a>
             <a style="color:yellow" href="https://goo.gl/PfBTs2" target="_blank" >Contact Me</a>
         </p>
