@@ -48,7 +48,7 @@
         .ui-datepicker {
             width: 100%;
             margin: 0 auto;
-            font-size: 14px !important;
+            /*font-size: 14px !important;*/
         }
 
         .ui-datepicker td {
@@ -86,6 +86,8 @@
 
     <script>
         $(function () {
+
+            $('#txtSLAEnd').text('Today is: ' + (new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()));
 
             var holidays = [
                     ////////////////////////////////////////////////////////////////
@@ -126,7 +128,7 @@
                 altField: "#txtdatepicker",
                 dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
                 //showButtonPanel: true,
-                changeMonth: true,
+                //changeMonth: true,
                 changeYear: true,
                 minDate: new Date(2010, 1 - 1, 1),
                 maxDate: new Date(2020, 12 - 1,31),
@@ -183,9 +185,40 @@
                     mm = '0' + mm
                 }
 
+                var SLAEndClarification = 'SLA End date: ';
+
+                $('#txtSLAEnd').css({ color: '#0000ff' });
+
+                if (Date.parse(bizd) < Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + new Date().getDate())) {
+                    if (Date.parse(bizd) === Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + (new Date().getDate() - 1))) {
+                        SLAEndClarification = 'SLA Ended Yesterday: ';
+                    }
+                    else {
+                        SLAEndClarification = 'SLA Ended in: ';
+                    }
+                    $('#txtSLAEnd').css({ color: '#ff0000' });
+                }
+                else {
+                    if (Date.parse(bizd) === Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + new Date().getDate())) {
+                        SLAEndClarification = 'SLA Ends today: ';
+                        $('#txtSLAEnd').css({ color: '#000000' });
+                    }
+                    else {
+                        if (Date.parse(bizd) > Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + new Date().getDate())) {
+                            if (Date.parse(bizd) === Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + (new Date().getDate() + 1))) {
+                                SLAEndClarification = 'SLA will Tomorrow: ';
+                            }
+                            else {
+                                SLAEndClarification = 'SLA will End in: ';
+                            }
+                            $('#txtSLAEnd').css({ color: '#00ff00' });
+                        }
+                    }
+                }
+
                 bizd = dd + '-' + mm + '-' + yyyy;
 
-                $('#txtSLAEnd').text("End Date: " + bizd);
+                $('#txtSLAEnd').text(SLAEndClarification + bizd);
 
                 if ($('#MarkResultinCal').prop('checked'))
                     $('#datepicker').datepicker("setDate", bizd);
@@ -199,6 +232,8 @@
 
             // Today button functionality
             $('#btnToday').click(function () {
+                $('#txtSLAEnd').css({ color: '#0000ff' });
+                $('#txtSLAEnd').text('Today is: ' + (new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()));
                 $('#datepicker').datepicker("setDate", new Date()).datepicker('hide').blur();
             });
 
@@ -226,27 +261,24 @@
         <div class="row col-lg-12">
 
             <div class="text-center">
-                <label class="textcolor" >Black is Today, Red is Official Holidays & Yellow is Weekends </label>
-            </div>
-
-            <div class="text-center">
-                <label class="textcolor">Date </label>
-
-                <input id="txtdatepicker" required="required" type="text" style="height:30px;width:130px;">
-
-                <label class="textcolor" >SLA </label></>
+                <br />
+                <label class="textcolor"style="font-size:15px;" >SLA </label></>
 
                 <input id="txtSLA" class="textcolor" style="width:100px;" type="text" value="1" min="1" max="365" required="required" />
 
-                <label class="textcolor" >WDS</label>
+                <label class="textcolor" style="font-size:15px;">WDS</label>
 
-                <input class="btn btn-success" id="btnCalc" type="submit" value="Calc" /></>
-            
+                <input class="btn btn-default" id="btnCalc" type="submit" value="Calc" /></>
+
+                <input class="btn btn-default" id="btnToday" type="button" value="Today" /></>
+
+                <label  id="txtSLAEnd" style="color:blue;font-size:16px;"> SLA End date: .................</label>
+            <br /><br />
             </div>
 
-            <div class="text-center">
-                <input class="btn btn-info btn-xs" id="btnToday" type="button" value="Today" /></>
+            <div id="datepicker"> </div>
 
+            <div class="text-center">
                 <label class="textcolor checkbox-inline">
                     <input id="MarkResultinCal" type="checkbox" /> Mark SLA End in the calendar
                 </label>
@@ -254,11 +286,9 @@
                 <label class="textcolor checkbox-inline">
                     <input id="btnAutoCalc" type="checkbox" /> Auto Calculate when choosing the date
                 </label>
-
-                <label class="label" id="txtSLAEnd" style="color:blue;font-size:20px;">Select SLA start date and duration</label> </>
+                <br />
+                <label class="textcolor">Black is Today, Red is Official Holidays & Yellow is Weekends </label>
             </div>
-
-            <div id="datepicker"> </div>
         </div>
     </div>
 
