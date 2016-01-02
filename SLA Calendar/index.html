@@ -8,12 +8,12 @@
     <link rel="icon" href="Sources/favicon.ico" />
     <title>SLA Calendar</title>
 
-    <link href="Sources/bootstrap.min.css" rel="stylesheet" />
     <link href="Sources/jquery-ui.min.css" rel="stylesheet" />
+    <link href="Sources/bootstrap.min.css" rel="stylesheet" />
 
-    <script src="Sources/bootstrap.min.js"></script>
     <script src="Sources/jquery-2.1.4.min.js"></script>
     <script src="Sources/jquery-ui.min.js"></script>
+    <script src="Sources/bootstrap.min.js"></script>
 
     <style>
         html, body {
@@ -32,7 +32,7 @@
 
         /*select text color*/
         #txtSLA {
-            color: yellow !important;
+            /*color: yellow !important;*/
         }
 
         /*Controls background*/
@@ -77,6 +77,12 @@
             border: 1px solid #5BC0DE !important;
             background:#000000 !important;
             /* background: #EEE url("images/ui-bg_highlight-soft_80_eeeeee_1x100.png") repeat-x scroll 50% top; */
+        }
+
+        .btnAsHightlight {
+            color: yellow !important;
+            background-color: #000 !important;
+            border-color: #000 !important;
         }
 
     </style>
@@ -227,48 +233,74 @@
     </script>
 </head>
 <body>
-    <div class="container" style="margin-bottom:50px;">
-
-        <div class="row col-lg-12">
-
-            <div class="text-center">
+    <div class="container-fluid" style="margin-bottom:50px;">
+        <div class="row">
+            <div class="col-lg-12 text-center">
                 <br />
-                <label class="textcolor"style="font-size:15px;" >SLA </label></>
+                <div class="col-lg-2"></div>
 
-                <input id="txtSLA" class="textcolor" style="width:100px;" pattern="[1-9]+" type="text" value="1" min="1" max="365" required="required" />
+                <div class="col-lg-3">
+                    <label class="textcolor" style="font-size:15px;">SLA </label></>
 
-                <label class="textcolor" style="font-size:15px;">WDS</label>
+                    <input id="txtSLA" class="textcolor" style="width:100px;" pattern="[1-9]+" type="text" value="1" min="1" max="365" required="required" />
 
-                <input class="btn btn-default" id="btnCalc" type="submit" value="Calc" /></>
+                    <label class="textcolor" style="font-size:15px;">WDS</label>
+                </div>
 
-                <input class="btn btn-default" id="btnToday" type="button" value="Today" /></>
+                <div class="col-lg-2" >
+                    <input class="btn btn-info" id="btnCalc" type="submit" value="Calc"  style="width:80px;"/></>
 
-                <label  id="txtSLAResult" style="color:blue;font-size:16px;"> SLA End date: .................</label>
-            <br /><br />
+                    <input class="btn btnAsHightlight" id="btnToday" type="button" value="Today" style="width:80px;"/></>
+                </div>
+
+                <div class="col-lg-3">
+                    <label id="txtSLAResult" style="color:blue;font-size:18px;"></label>
+                </div>
+
+                <div class="col-lg-2"></div>
             </div>
+        </div>
 
-            <div id="datepicker"> </div>
+        <div class="row">
+            <div id="datepicker" class="col-lg-12">
+            </div>
+        </div>
 
-            <div class="text-center">
-                <label class="textcolor checkbox-inline">
-                    <input id="MarkResultinCal" type="checkbox" /> Mark SLA End in the calendar
-                </label>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="col-lg-3"></div>
 
-                <label class="textcolor checkbox-inline">
-                    <input id="btnAutoCalc" type="checkbox" /> Auto Calculate when choosing the date
-                </label>
-                <br />
+                <div class="col-lg-3">
+                    <label class="textcolor checkbox-inline">
+                        <input id="MarkResultinCal" type="checkbox" /> Mark SLA End in the calendar
+                    </label>
+                </div>
+
+                <div class="col-lg-3">
+                    <label class="textcolor checkbox-inline">
+                        <input id="btnAutoCalc" type="checkbox" /> Auto Calculate when choosing the date
+                    </label>
+                </div>
+
+                <div class="col-lg-3"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
                 <label class="textcolor">Black is Today, Red is Official Holidays & Yellow is Weekends </label>
             </div>
         </div>
-    </div>
 
-    <div class="textcolor" style="bottom:0;width:100%;position:fixed;background-color:#233140;text-align:center;font-size:15px;">
-        <p style="margin:0px;color:white;">Last update: 1/1/2016 - SLA Calendar by 
-            <a style="color:cyan;" href="https://about.me/m7md.3.fta7" target="_blank">Mohamed Ahmed Abdel Fattah</a>
-            <a style="color:yellow" href="https://goo.gl/PfBTs2" target="_blank" >Contact Me</a>
-        </p>
-	</div>
+        <div class="row">
+            <footer class="col-lg-12 textcolor" style="bottom:0;position:fixed;background-color:#233140;text-align:center;">
+                <p style="margin:0px;color:white;">Last update: 2/1/2016 - SLA Calendar by
+                    <a style="color:cyan;" href="https://about.me/m7md.3.fta7" target="_blank">Mohamed Ahmed Abdel Fattah</a>
+                    <a style="color:yellow" href="https://goo.gl/PfBTs2" target="_blank">Contact Me</a>
+                </p>
+            </footer>
+        </div>
+    </div>
 
 </body>
 </html>
