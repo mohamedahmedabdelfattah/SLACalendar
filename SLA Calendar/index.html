@@ -17,13 +17,13 @@
 
     <style>
         html, body {
-            background-color: #C6C6C6;
+            background-color: #d3d3d3;
             /*background: url('../img/darkdenim3.png') repeat 0 0 #555;*/
         }
 
-        /*.textcolor .spinner{
+        .textcolor .spinner{
             color:black !important;
-        }*/
+        }
 
          /*JQuery UI datepicker select fix for theme color*/
         select {
@@ -81,7 +81,15 @@
         .btnAsHightlight {
             color: yellow !important;
             background-color: #000 !important;
-            border-color: #000 !important;
+            border-color: #5BC0DE !important;
+            border:2px solid;
+        }
+
+        .btnCalcAsHighlight {
+            color: white;
+            background: #0972A5 url("images/ui-bg_highlight-hard_20_0972a5_1x100.png") repeat-x scroll 50% 50% !important;
+            border-color: #26B3F7 !important;
+            border: 2px solid;
         }
 
     </style>
@@ -251,7 +259,7 @@
 
                     <label class="textcolor" style="font-size:15px;">WDS</label>
 
-                    <input class="btn btn-info" id="btnCalc" type="submit" value="Calc" style="width:80px;" /></>
+                    <input class="btn btnCalcAsHighlight" id="btnCalc" type="submit" value="Calc" style="width:80px;" /></>
 
                     <input class="btn btnAsHightlight" id="btnToday" type="button" value="Today" style="width:80px;" /></>
                 </div>
