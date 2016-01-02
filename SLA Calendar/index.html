@@ -141,77 +141,84 @@
 
             $('#btnCalc').click(function () {
 
-                var today = $('#datepicker').datepicker("getDate");  // global variables
-                
-                Date.prototype.addDays = function (days) { return new Date(this.getTime() + days * 24 * 60 * 60 * 1000); }
+                if ($('#txtSLA').val() <= 365) {
 
-                Date.prototype.addBusAndHoliDays = function (days) {
-                    var cDate = this;
-                    var holiday = new Date();
-                    var c = '', h = '';
-                    for (var i = 1; i <= days ; i++) {
-                        cDate.setDate(cDate.getDate() + 1);
-                        if (cDate.getDay() == 5 || cDate.getDay() == 6) { days++; }
-                        else {
-                            for (j = 0; j < holidays.length; j++) {
-                                holiday = new Date(holidays[j][0], (holidays[j][1] - 1), holidays[j][2]);
-                                c = cDate.toDateString(); h = holiday.toDateString();
-                                if (c == h) { days++; }
-                            }
-                        }
-                    } return cDate;
-                }
+                    var today = $('#datepicker').datepicker("getDate");  // global variables
 
-                var bizd = today.addBusAndHoliDays($('#txtSLA').val());
+                    Date.prototype.addDays = function (days) { return new Date(this.getTime() + days * 24 * 60 * 60 * 1000); }
 
-                var SLAEndClarification = 'SLA End date: ';
-                $('#txtSLAResult').css({ color: '#0000ff' });
-
-                // Determines The humanid clarification of SLA End date
-                if (Date.parse(bizd) < Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + new Date().getDate())) {
-                    if (Date.parse(bizd) == Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + (new Date().getDate() - 1))) {
-                        SLAEndClarification = 'SLA Ended Yesterday: ';
-                    }
-                    else {
-                        SLAEndClarification = 'SLA Ended in: ';
-                    }
-                    $('#txtSLAResult').css({ color: '#ff0000' });
-                }
-                else {
-                    if (Date.parse(bizd) == Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + new Date().getDate())) {
-                        SLAEndClarification = 'SLA Ends today: ';
-                        $('#txtSLAResult').css({ color: '#000000' });
-                    }
-                    else {
-                        if (Date.parse(bizd) > Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + new Date().getDate())) {
-                            if (Date.parse(bizd) == Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + (new Date().getDate() + 1))) {
-                                SLAEndClarification = 'SLA will end Tomorrow: ';
-                            }
+                    Date.prototype.addBusAndHoliDays = function (days) {
+                        var cDate = this;
+                        var holiday = new Date();
+                        var c = '', h = '';
+                        for (var i = 1; i <= days ; i++) {
+                            cDate.setDate(cDate.getDate() + 1);
+                            if (cDate.getDay() == 5 || cDate.getDay() == 6) { days++; }
                             else {
-                                SLAEndClarification = 'SLA will End in: ';
+                                for (j = 0; j < holidays.length; j++) {
+                                    holiday = new Date(holidays[j][0], (holidays[j][1] - 1), holidays[j][2]);
+                                    c = cDate.toDateString(); h = holiday.toDateString();
+                                    if (c == h) { days++; }
+                                }
                             }
-                            $('#txtSLAResult').css({ color: '#078A07' });
+                        } return cDate;
+                    }
+
+                    var bizd = today.addBusAndHoliDays($('#txtSLA').val());
+
+                    var SLAEndClarification = 'SLA End date: ';
+                    $('#txtSLAResult').css({ color: '#0000ff' });
+
+                    // Determines The humanid clarification of SLA End date
+                    if (Date.parse(bizd) < Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + new Date().getDate())) {
+                        if (Date.parse(bizd) == Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + (new Date().getDate() - 1))) {
+                            SLAEndClarification = 'SLA Ended Yesterday: ';
+                        }
+                        else {
+                            SLAEndClarification = 'SLA Ended in: ';
+                        }
+                        $('#txtSLAResult').css({ color: '#ff0000' });
+                    }
+                    else {
+                        if (Date.parse(bizd) == Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + new Date().getDate())) {
+                            SLAEndClarification = 'SLA Ends today: ';
+                            $('#txtSLAResult').css({ color: '#000000' });
+                        }
+                        else {
+                            if (Date.parse(bizd) > Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + new Date().getDate())) {
+                                if (Date.parse(bizd) == Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + (new Date().getDate() + 1))) {
+                                    SLAEndClarification = 'SLA will end Tomorrow: ';
+                                }
+                                else {
+                                    SLAEndClarification = 'SLA will End in: ';
+                                }
+                                $('#txtSLAResult').css({ color: '#078A07' });
+                            }
                         }
                     }
+
+                    var dd = bizd.getDate();
+                    var mm = bizd.getMonth() + 1; //January is 0!
+
+                    var yyyy = bizd.getFullYear();
+                    if (dd < 10) {
+                        dd = '0' + dd
+                    }
+                    if (mm < 10) {
+                        mm = '0' + mm
+                    }
+
+                    bizd = dd + '-' + mm + '-' + yyyy;
+
+                    $('#txtSLAResult').text(SLAEndClarification + bizd);
+
+                    if ($('#MarkResultinCal').prop('checked'))
+                        $('#datepicker').datepicker("setDate", bizd);
                 }
-
-                var dd = bizd.getDate();
-                var mm = bizd.getMonth() + 1; //January is 0!
-
-                var yyyy = bizd.getFullYear();
-                if (dd < 10) {
-                    dd = '0' + dd
+                else
+                {
+                    $('#txtSLAResult').text("Check SLA");
                 }
-                if (mm < 10) {
-                    mm = '0' + mm
-                }
-
-                bizd = dd + '-' + mm + '-' + yyyy;
-
-                $('#txtSLAResult').text(SLAEndClarification + bizd);
-
-                if ($('#MarkResultinCal').prop('checked'))
-                    $('#datepicker').datepicker("setDate", bizd);
             });
 
             //Automatically Calculate on date selection instead of clicking Calc button each time
@@ -235,9 +242,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 text-center">
+                <br />
                 <div class="col-lg-3"></div>
-                <div class="col-lg-6">
-                    <br />
+                <div class="col-lg-4">
                     <label class="textcolor" style="font-size:15px;">SLA </label></>
 
                     <input id="txtSLA" class="textcolor" style="width:100px;" pattern="[1-9]+" type="text" value="1" min="1" max="365" required="required" />
@@ -247,10 +254,14 @@
                     <input class="btn btn-info" id="btnCalc" type="submit" value="Calc" style="width:80px;" /></>
 
                     <input class="btn btnAsHightlight" id="btnToday" type="button" value="Today" style="width:80px;" /></>
+                </div>
 
+                <div class="col-lg-4 text-left">
                     <label id="txtSLAResult" style="color:blue;font-size:18px;"></label>
                 </div>
-                <div class="col-lg-3"></div>
+
+                <div class="col-lg-2"></div>
+                <br /><br />
             </div>
         </div>
 
