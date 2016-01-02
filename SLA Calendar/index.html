@@ -112,7 +112,7 @@
             ];
 
             // Controls Initialization
-            $('#txtSLAResult').text('Today is: ' + (new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()));
+            $('#txtSLAResult').text('Today: ' + (new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()));
             $('#txtSLA').spinner();
             $('#datepicker').datepicker({
                 //firstDay: 0,
@@ -224,7 +224,7 @@
             // Today button functionality
             $('#btnToday').click(function () {
                 $('#txtSLAResult').css({ color: '#0000ff' });
-                $('#txtSLAResult').text('Today is: ' + (new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()));
+                $('#txtSLAResult').text('Today: ' + (new Date().getDate() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getFullYear()));
                 $('#datepicker').datepicker("setDate", new Date()).datepicker('hide').blur();
             });
 
