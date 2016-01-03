@@ -37,7 +37,7 @@
 
         /*Controls background*/
         .ui-widget-content{
-            background: #222 url("images/ui-bg_highlight-soft_35_222222_1x100.png") repeat-x scroll 50% 50% !important;
+            /*background: #222 url("images/ui-bg_highlight-soft_35_222222_1x100.png") repeat-x scroll 50% 50% !important;*/
         }
 
         /*Centers the datepicker in display*/
@@ -137,6 +137,7 @@
                 //firstDay: 0,
                 defaultDate: 0,
                 numberOfMonths: [3, 4],
+                altField: "#txtCalcRangeDate",
                 dayNamesMin: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
                 changeMonth: true,
                 changeYear: true,
@@ -159,22 +160,51 @@
                 return [true, date.getDay() == 5 || date.getDay() == 6 ? 'egweekends': ''];
             };
 
-
             var calcRangeNoticeCheck = false;
+            var calcRangeEnabled = false;
+
             $('#btnRange').click(function () {
                 if (!calcRangeNoticeCheck) {
-                    alert("Use Calc Range to select two different dates back to back and get the number of business days between them.\n\nThis mode works only once then it will be disabled automatically to continue using the normal SLA Calendar mode\nso you will have to use this button everytime you want to calculate two dates difference.\n\n * THIS IS A ONE TIME NOTICE DISPLAYED EVERY PAGE RELOAD *");
+                    alert("Mostly for Consession number of days, This feature will automatically calculate the difference between any two dates.\n\nThis mode works only once then it will be disabled automatically so you have to click this button each time to use it.\n\nThe button will appear in green to indicate that Range Calculation is active then you click on two dates to get the result.\n\n * THIS IS A ONE TIME NOTICE DISPLAYED EVERY PAGE LOAD *");
                     calcRangeNoticeCheck = true;
                 }
 
+                $('#btnRange').removeClass('btn-danger');
+                $('#btnRange').addClass('btn-success');
+
+                calcRangeEnabled = true;
             });
 
+            var calcRangeFirstDate = false;
+            var calcRangeSecondDate = false;
+
+            var firstDay = 'firstdate';
+            var secondDay = 'seconddate';
+
+            function CalcRange() {
+
+                var range = Date.parse(secondDay) - Date.parse(firstDay);
+
+                var date1 = new Date(firstDay);
+                var date2 = new Date(secondDay);
+                var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                $('#txtSLAResult').text("There is " + range +" days between " + firstDay + " and " + secondDay);
+
+                calcRangeEnabled = false;
+                calcRangeFirstDate = false;
+                calcRangeSecondDate = false;
+
+                $('#btnRange').removeClass('btn-success');
+                $('#btnRange').addClass('btn-danger');
+            };
 
             $('#btnCalc').click(function () {
 
                 if ($('#txtSLA').val() <= 365) {
 
-                    var today = $('#datepicker').datepicker("getDate");  // global variables
+                    var today = $('#datepicker').datepicker("getDate");
 
                     Date.prototype.addDays = function (days) { return new Date(this.getTime() + days * 24 * 60 * 60 * 1000); }
 
@@ -254,8 +284,24 @@
 
             //Automatically Calculate on date selection instead of clicking Calc button each time
             function autoCalc() {
-                if ($('#btnAutoCalc').prop('checked'))
-                    $('#btnCalc').trigger('click');
+                if (calcRangeEnabled) {
+                    if (!calcRangeFirstDate) {
+                        firstDay = $('#txtCalcRangeDate').val();
+                        $('#txtSLAResult').text("Start date: " + firstDay);
+                        calcRangeFirstDate = true;
+                    }
+                    else {
+                        if (!calcRangeSecondDate) {
+                            secondDay = $('#txtCalcRangeDate').val();
+                            calcRangeSecondDate = true;
+                            CalcRange();
+                        }
+                    }
+                }
+                else {
+                    if ($('#btnAutoCalc').prop('checked'))
+                        $('#btnCalc').trigger('click');
+                }
             };
 
             // Today button functionality
@@ -280,10 +326,12 @@
 
                     <input id="txtSLA" class="textcolor" style="width:100px;" pattern="[0-9]+" type="text" value="1" min="1" max="365" required="required" />
 
+                    <input id="txtCalcRangeDate" type="hidden" />
+
                     <label class="textcolor" style="font-size:15px;">WDS</label>
 
                     <input class="btn btnCalcAsHighlight" id="btnCalc" type="button" value="Calc" style="width:80px;" /></>
-
+                    
                     <input class="btn btnAsHightlight" id="btnToday" type="button" value="Today" style="width:80px;" /></>
                 </div>
 
@@ -292,7 +340,7 @@
                 </div>
 
                 <div class="col-lg-2 textcolor">
-                    <input class="btn btn-warning" id="btnRange" type="button" value="Calc Range" style="color:black;"/></>
+                    <input class="btn btn-danger" id="btnRange" type="button" value="Calc Range" /></>
                 </div>
 
                 <div class="col-lg-1"></div>
