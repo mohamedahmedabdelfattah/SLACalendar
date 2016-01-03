@@ -159,6 +159,17 @@
                 return [true, date.getDay() == 5 || date.getDay() == 6 ? 'egweekends': ''];
             };
 
+
+            var calcRangeNoticeCheck = false;
+            $('#btnRange').click(function () {
+                if (!calcRangeNoticeCheck) {
+                    alert("Use Calc Range to select two different dates back to back and get the number of business days between them.\n\nThis mode works only once then it will be disabled automatically to continue using the normal SLA Calendar mode\nso you will have to use this button everytime you want to calculate two dates difference.\n\n * THIS IS A ONE TIME NOTICE DISPLAYED EVERY PAGE RELOAD *");
+                    calcRangeNoticeCheck = true;
+                }
+
+            });
+
+
             $('#btnCalc').click(function () {
 
                 if ($('#txtSLA').val() <= 365) {
@@ -263,7 +274,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <br />
-                <div class="col-lg-3"></div>
+                <div class="col-lg-1"></div>
                 <div class="col-lg-4">
                     <label class="textcolor" style="font-size:15px;">SLA </label></>
 
@@ -271,16 +282,20 @@
 
                     <label class="textcolor" style="font-size:15px;">WDS</label>
 
-                    <input class="btn btnCalcAsHighlight" id="btnCalc" type="submit" value="Calc" style="width:80px;" /></>
+                    <input class="btn btnCalcAsHighlight" id="btnCalc" type="button" value="Calc" style="width:80px;" /></>
 
                     <input class="btn btnAsHightlight" id="btnToday" type="button" value="Today" style="width:80px;" /></>
                 </div>
 
-                <div class="col-lg-4 text-left">
+                <div class="col-lg-4">
                     <label id="txtSLAResult" style="color:blue;font-size:18px;"></label>
                 </div>
 
-                <div class="col-lg-2"></div>
+                <div class="col-lg-2 textcolor">
+                    <input class="btn btn-warning" id="btnRange" type="button" value="Calc Range" style="color:black;"/></>
+                </div>
+
+                <div class="col-lg-1"></div>
                 <br /><br />
             </div>
         </div>
@@ -318,7 +333,7 @@
         <div class="row">
             <br />
             <footer class="col-lg-12 textcolor" style="bottom:0;position:fixed;background-color:#233140;text-align:center;">
-                <p style="margin:0px;color:white;">Last update: 2/1/2016 - SLA Calendar by
+                <p style="margin:0px;color:white;">Last update: 3/1/2016 - SLA Calendar by
                     <a style="color:cyan;" href="https://about.me/m7md.3.fta7" target="_blank">Mohamed Ahmed Abdel Fattah</a>
                     <a style="color:yellow" href="https://goo.gl/PfBTs2" target="_blank">Contact Me</a>
                 </p>
