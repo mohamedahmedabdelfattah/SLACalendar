@@ -186,7 +186,7 @@
                 var diffDays = Math.round(Math.abs((firstDay.getTime() - secondDay.getTime()) / (24 * 60 * 60 * 1000)));
 
                 var firstDate = firstDay.getDate() + '-' + (firstDay.getMonth() + 1) + '-' + firstDay.getFullYear();
-                var secondDate = firstDay.getDate() + '-' + (firstDay.getMonth() + 1) + '-' + firstDay.getFullYear();
+                var secondDate = secondDay.getDate() + '-' + (secondDay.getMonth() + 1) + '-' + secondDay.getFullYear();
 
                 $('#txtSLAResult').text("There is " + diffDays + " days between " + firstDate + " and " + secondDate);
 
