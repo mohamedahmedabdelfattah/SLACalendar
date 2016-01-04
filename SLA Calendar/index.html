@@ -142,10 +142,10 @@
                 changeMonth: true,
                 changeYear: true,
                 minDate: new Date(2010, 1 - 1, 1),
-                maxDate: new Date(2020, 12 - 1,31),
+                maxDate: new Date(2020, 12 - 1, 31),
                 dateFormat: 'dd-mm-yy',
                 beforeShowDay: weekends,
-                onSelect: autoCalc                
+                onSelect: autoCalc
             });
 
             // Add a custom class to specific dates to color theme using CSS
@@ -153,11 +153,11 @@
                 var dayoff = date.getFullYear() + ',' + (date.getMonth() + 1) + ',' + date.getDate();
 
                 for (i = 0; i < holidays.length; i++) {
-                    if(holidays[i] == dayoff)
-                        return [true,'dayoff'];
+                    if (holidays[i] == dayoff)
+                        return [true, 'dayoff'];
                 }
 
-                return [true, date.getDay() == 5 || date.getDay() == 6 ? 'egweekends': ''];
+                return [true, date.getDay() == 5 || date.getDay() == 6 ? 'egweekends' : ''];
             };
 
             var calcRangeNoticeCheck = false;
@@ -178,19 +178,17 @@
             var calcRangeFirstDate = false;
             var calcRangeSecondDate = false;
 
-            var firstDay = 'firstdate';
-            var secondDay = 'seconddate';
+            var firstDay;
+            var secondDay;
 
             function CalcRange() {
 
-                var range = Date.parse(secondDay) - Date.parse(firstDay);
+                var diffDays = Math.round(Math.abs((firstDay.getTime() - secondDay.getTime()) / (24 * 60 * 60 * 1000)));
 
-                var date1 = new Date(firstDay);
-                var date2 = new Date(secondDay);
-                var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-                var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                var firstDate = firstDay.getDate() + '-' + (firstDay.getMonth() + 1) + '-' + firstDay.getFullYear();
+                var secondDate = firstDay.getDate() + '-' + (firstDay.getMonth() + 1) + '-' + firstDay.getFullYear();
 
-                $('#txtSLAResult').text("There is " + range +" days between " + firstDay + " and " + secondDay);
+                $('#txtSLAResult').text("There is " + diffDays + " days between " + firstDate + " and " + secondDate);
 
                 calcRangeEnabled = false;
                 calcRangeFirstDate = false;
@@ -276,8 +274,7 @@
                     if ($('#MarkResultinCal').prop('checked'))
                         $('#datepicker').datepicker("setDate", bizd);
                 }
-                else
-                {
+                else {
                     $('#txtSLAResult').text("Check SLA");
                 }
             });
@@ -286,13 +283,13 @@
             function autoCalc() {
                 if (calcRangeEnabled) {
                     if (!calcRangeFirstDate) {
-                        firstDay = $('#txtCalcRangeDate').val();
-                        $('#txtSLAResult').text("Start date: " + firstDay);
+                        firstDay = $('#datepicker').datepicker("getDate");
+                        $('#txtSLAResult').text("Start date: " + (firstDay.getDate() + '-' + (firstDay.getMonth() + 1) + '-' + firstDay.getFullYear()));
                         calcRangeFirstDate = true;
                     }
                     else {
                         if (!calcRangeSecondDate) {
-                            secondDay = $('#txtCalcRangeDate').val();
+                            secondDay = $('#datepicker').datepicker("getDate");
                             calcRangeSecondDate = true;
                             CalcRange();
                         }
@@ -340,7 +337,7 @@
                 </div>
 
                 <div class="col-lg-2 textcolor">
-                    <!--<input class="btn btn-danger" id="btnRange" type="button" value="Calc Range" /></>-->
+                    <input class="btn btn-danger" id="btnRange" type="button" value="Calc Range" /></>
                 </div>
 
                 <div class="col-lg-1"></div>
