@@ -316,6 +316,8 @@
                     }
                 }
                 else {
+                    selectedDate = $('#datepicker').datepicker("getDate").getDate() + "-" + ($('#datepicker').datepicker("getDate").getMonth() + 1) + "-" + $('#datepicker').datepicker("getDate").getFullYear();
+                    $('#txtSLAResult').text("Selected date: " + selectedDate);
                     if ($('#btnAutoCalc').prop('checked'))
                         $('#btnCalc').trigger('click');
                 }
