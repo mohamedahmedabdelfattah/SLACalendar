@@ -180,10 +180,14 @@
             var calcRangeEnabled = false;
 
             $('#btnRange').click(function () {
+
                 if (!calcRangeNoticeCheck) {
                     alert("Mostly for Consession number of days, This feature will automatically calculate the difference between any two dates.\n\nThis mode works only once then it will be disabled automatically so you have to click this button each time to use it.\n\nThe button will appear in green to indicate that Range Calculation is active then you click on two dates to get the result.\n\n * THIS IS A ONE TIME NOTICE DISPLAYED EVERY PAGE LOAD *");
                     calcRangeNoticeCheck = true;
                 }
+
+                $('#txtSLAResult').css({ color: '#0000ff' });
+                $('#txtSLAResult').text("Select the start date");
 
                 $('#btnRange').removeClass('btn-danger');
                 $('#btnRange').addClass('btn-success');
@@ -209,6 +213,8 @@
                 calcRangeEnabled = false;
                 calcRangeFirstDate = false;
                 calcRangeSecondDate = false;
+
+                $('#txtSLAResult').css({ color: '#0000ff' });
 
                 $('#btnRange').removeClass('btn-success');
                 $('#btnRange').addClass('btn-danger');
@@ -298,6 +304,7 @@
                     if (!calcRangeFirstDate) {
                         firstDay = $('#datepicker').datepicker("getDate");
                         $('#txtSLAResult').text("Start date: " + (firstDay.getDate() + '-' + (firstDay.getMonth() + 1) + '-' + firstDay.getFullYear()));
+                        $('#txtSLAResult').text($('#txtSLAResult').text() + ", Select the end date");
                         calcRangeFirstDate = true;
                     }
                     else {
