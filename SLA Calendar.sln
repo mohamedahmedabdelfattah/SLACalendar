@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebInterface", "SLA Calendar\WebInterface.csproj", "{7C0EAC40-4BCF-44CB-A84D-368A337EDC47}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SLA Calendar", "SLA Calendar\SLA Calendar.csproj", "{7C0EAC40-4BCF-44CB-A84D-368A337EDC47}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinApp", "WinApp\WinApp.csproj", "{BC263063-FBB4-465E-97DA-659A47786364}"
 EndProject
