@@ -204,7 +204,7 @@
                 var firstDate = firstDay.getDate() + '-' + (firstDay.getMonth() + 1) + '-' + firstDay.getFullYear();
                 var secondDate = secondDay.getDate() + '-' + (secondDay.getMonth() + 1) + '-' + secondDay.getFullYear();
 
-                $('#txtSLAResult').text("There is " + diffDays + " days between " + firstDate + " and " + secondDate);
+                $('#txtSLAResult').text(diffDays + " day(s) between " + firstDate + " and " + secondDate);
 
                 calcRangeEnabled = false;
                 calcRangeFirstDate = false;
@@ -217,8 +217,6 @@
             $('#btnCalc').click(function () {
 
                 if ($('#txtSLA').val() <= 365) {
-
-                    var today = $('#datepicker').datepicker("getDate");
 
                     Date.prototype.addBusAndHoliDays = function (days) {
                         var cDate = this;
@@ -237,12 +235,13 @@
                         } return cDate;
                     }
 
+                    var today = $('#datepicker').datepicker("getDate");
                     var bizd = today.addBusAndHoliDays($('#txtSLA').val());
 
                     var SLAEndClarification = 'SLA End date: ';
                     $('#txtSLAResult').css({ color: '#0000ff' });
 
-                    // Determines The humanid clarification of SLA End date
+                    // Determines The humanoid clarification of SLA End date
                     if (Date.parse(bizd) < Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + new Date().getDate())) {
                         if (Date.parse(bizd) == Date.parse(new Date().getFullYear() + ',' + (new Date().getMonth() + 1) + ',' + (new Date().getDate() - 1))) {
                             SLAEndClarification = 'SLA Ended Yesterday: ';
