@@ -220,11 +220,6 @@
 
                     var today = $('#datepicker').datepicker("getDate");
 
-                    //Used to add dates without consideration for weekends or holidays
-                    //Date.prototype.addDays = function (days) {
-                    //    return new Date(this.getTime() + days * 24 * 60 * 60 * 1000);
-                    //}
-
                     Date.prototype.addBusAndHoliDays = function (days) {
                         var cDate = this;
                         var holiday = new Date();
