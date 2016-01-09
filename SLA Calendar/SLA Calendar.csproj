@@ -66,12 +66,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Sources\favicon.ico" />
     <Content Include="Sources\holidays.js" />
     <Content Include="Sources\images\animated-overlay.gif" />
     <Content Include="Sources\images\cal_logo.png" />
     <Content Include="Sources\images\darkdenim3.png" />
     <Content Include="Sources\images\dark_leather.png" />
+    <Content Include="Sources\images\favicon.png" />
     <Content Include="Sources\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Sources\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Sources\images\ui-bg_flat_10_000000_40x100.png" />
