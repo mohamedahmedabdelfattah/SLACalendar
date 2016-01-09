@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Sources\favicon.ico" />
+    <Content Include="Sources\holidays.js" />
     <Content Include="Sources\images\animated-overlay.gif" />
     <Content Include="Sources\images\cal_logo.png" />
     <Content Include="Sources\images\darkdenim3.png" />
