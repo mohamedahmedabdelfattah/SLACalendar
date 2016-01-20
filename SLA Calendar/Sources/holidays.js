@@ -1,6 +1,6 @@
 ﻿// Add Custom Holidays like below to disable them
 // DON`T TOUCH ANY LINE THAT STARTS WITH THE TWO BACKSLASHES -> // <-
-// It doesn`t have any effect and is used for notes only
+// Lines with that Mark don`t have any effect and are used for notes
 
 
 // Date format should be like [YEAR,MONTH,DAY]
